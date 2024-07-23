@@ -4,66 +4,65 @@ import java.util.ArrayList;
 
 import model.TheLoai;
 
-public class TheLoaiDAO {
-	private ArrayList<TheLoai> data = new ArrayList<TheLoai>();
+public class TheLoaiDAO implements DAOInterface<TheLoai> {
+	private ArrayList<TheLoai> data = new ArrayList<>();
 
+	@Override
 	public ArrayList<TheLoai> selectAll() {
-		return data;
+		return this.data;
 	}
 
-	public TheLoai selectById(String id) {
-		for (TheLoai theLoai : data) {
-			if (theLoai.getMaTheLoai().equals(id)) {
-				return theLoai;
+	@Override
+	public TheLoai selectById(TheLoai t) {
+		for (TheLoai TheLoai : data) {
+			if (data.equals(t)) {
+				return TheLoai;
 			}
 		}
 		return null;
 	}
 
-	public int insert(TheLoai theLoai) {
-		TheLoai check = this.selectById(theLoai.getMaTheLoai());
-		if (check == null) {
-			data.add(theLoai);
+	@Override
+	public int insert(TheLoai t) {
+		if (this.selectById(t) == null) {
+			this.data.add(t);
 			return 1;
 		}
 		return 0;
 	}
 
-	public int insertAll(ArrayList<TheLoai> list) {
+	@Override
+	public int insertAll(ArrayList<TheLoai> arr) {
 		int dem = 0;
-		for (TheLoai theLoai : list) {
-			if (selectById(theLoai.getMaTheLoai()) == null) {
-				dem += this.insert(theLoai);
-			}
+		for (TheLoai TheLoai : arr) {
+			dem += this.insert(TheLoai);
 		}
 		return dem;
 	}
 
-	public int delete(TheLoai theLoai) {
-		TheLoai check = this.selectById(theLoai.getMaTheLoai());
-		if (check != null) {
-			data.remove(theLoai);
+	@Override
+	public int delete(TheLoai t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
 			return 1;
 		}
 		return 0;
 	}
 
-	public int deleteAll(ArrayList<TheLoai> list) {
+	@Override
+	public int deleteAll(ArrayList<TheLoai> arr) {
 		int dem = 0;
-		for (TheLoai theLoai : list) {
-			TheLoai check = this.selectById(theLoai.getMaTheLoai());
-			if (check != null) {
-				dem += this.delete(theLoai);
-			}
+		for (TheLoai TheLoai : arr) {
+			dem += this.delete(TheLoai);
 		}
 		return dem;
 	}
 
-	public int update(TheLoai theLoai) {
-		TheLoai check = this.selectById(theLoai.getMaTheLoai());
-		if (check != null) {
-			data.remove(check);
-			data.add(theLoai);
+	@Override
+	public int update(TheLoai t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
+			this.data.add(t);
 			return 1;
 		}
 		return 0;

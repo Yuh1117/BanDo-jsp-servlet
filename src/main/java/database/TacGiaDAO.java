@@ -1,76 +1,71 @@
 package database;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import model.TacGia;
-import model.TheLoai;
 
-public class TacGiaDAO {
-	private ArrayList<TacGia> data = new ArrayList<TacGia>();
+public class TacGiaDAO implements DAOInterface<TacGia> {
+	private ArrayList<TacGia> data = new ArrayList<>();
 
+	@Override
 	public ArrayList<TacGia> selectAll() {
-		return data;
+		return this.data;
 	}
 
-	public TacGia selectById(String id) {
-		TacGia tim = new TacGia();
-		tim.setMaTacGia(id);
-
+	@Override
+	public TacGia selectById(TacGia t) {
 		for (TacGia tacGia : data) {
-			if (tacGia.equals(tim)) {
+			if (data.equals(t)) {
 				return tacGia;
 			}
 		}
 		return null;
 	}
 
-	public int insert(TacGia tg) {
-		TacGia kiemTraTonTai = this.selectById(tg.getMaTacGia());
-		if (kiemTraTonTai == null) {
-			data.add(tg);
+	@Override
+	public int insert(TacGia t) {
+		if (this.selectById(t) == null) {
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
-	public int insertAll(ArrayList<TacGia> list) {
+	@Override
+	public int insertAll(ArrayList<TacGia> arr) {
 		int dem = 0;
-		for (TacGia tacGia : list) {
+		for (TacGia tacGia : arr) {
 			dem += this.insert(tacGia);
 		}
 		return dem;
 	}
 
-	public int delete(TacGia tg) {
-		TacGia kiemTraTonTai = this.selectById(tg.getMaTacGia());
-		if (kiemTraTonTai != null) {
-			data.remove(tg);
+	@Override
+	public int delete(TacGia t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
-	
-	public int deleteAll(ArrayList<TacGia> list) {
+
+	@Override
+	public int deleteAll(ArrayList<TacGia> arr) {
 		int dem = 0;
-		for (TacGia tacGia : list) {
-			TacGia check = this.selectById(tacGia.getMaTacGia());
-			if (check != null) {
-				dem += this.delete(tacGia);
-			}
+		for (TacGia tacGia : arr) {
+			dem += this.delete(tacGia);
 		}
 		return dem;
 	}
 
-	public int update(TacGia tg) {
-		TacGia kiemTraTonTai = this.selectById(tg.getMaTacGia());
-		if (kiemTraTonTai != null) {
-			data.remove(kiemTraTonTai);
-			data.add(tg);
+	@Override
+	public int update(TacGia t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 }

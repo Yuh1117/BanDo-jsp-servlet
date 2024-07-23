@@ -1,74 +1,71 @@
 package database;
 
 import java.util.ArrayList;
+
 import model.KhachHang;
+import model.TheLoai;
 
-// ctrl + shift + s
-// ctrl + shift + f
-public class KhachHangDAO {
-	private ArrayList<KhachHang> data = new ArrayList<KhachHang>();
+public class KhachHangDAO implements DAOInterface<KhachHang> {
+	private ArrayList<KhachHang> data = new ArrayList<>();
 
+	@Override
 	public ArrayList<KhachHang> selectAll() {
-		return data;
+		return this.data;
 	}
 
-	public KhachHang selectById(String id) {
+	@Override
+	public KhachHang selectById(KhachHang t) {
 		for (KhachHang KhachHang : data) {
-			if (KhachHang.getMaKhacHang().equals(id)) {
+			if (data.equals(t)) {
 				return KhachHang;
 			}
 		}
 		return null;
 	}
 
-	public int insert(KhachHang khachHang) {
-		KhachHang kiemTraTonTai = this.selectById(khachHang.getMaKhacHang());
-		if (kiemTraTonTai == null) {
-			data.add(khachHang);
+	@Override
+	public int insert(KhachHang t) {
+		if (this.selectById(t) == null) {
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
-	public int insertAll(ArrayList<KhachHang> list) {
+	@Override
+	public int insertAll(ArrayList<KhachHang> arr) {
 		int dem = 0;
-		for (KhachHang KhachHang : list) {
+		for (KhachHang KhachHang : arr) {
 			dem += this.insert(KhachHang);
 		}
 		return dem;
 	}
 
-	public int delete(KhachHang khachHang) {
-		KhachHang kiemTraTonTai = this.selectById(khachHang.getMaKhacHang());
-		if (kiemTraTonTai != null) {
-			data.remove(khachHang);
+	@Override
+	public int delete(KhachHang t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
-	public int deleteAll(ArrayList<KhachHang> list) {
+	@Override
+	public int deleteAll(ArrayList<KhachHang> arr) {
 		int dem = 0;
-		for (KhachHang khachHang : list) {
-			KhachHang kiemTraTonTai = this.selectById(khachHang.getMaKhacHang());
-			if (kiemTraTonTai != null) {
-				data.remove(khachHang);
-				dem++;
-			}
+		for (KhachHang KhachHang : arr) {
+			dem += this.delete(KhachHang);
 		}
 		return dem;
 	}
 
-	public int update(KhachHang khachHang) {
-		KhachHang kiemTraTonTai = this.selectById(khachHang.getMaKhacHang());
-		if (kiemTraTonTai != null) {
-			data.remove(kiemTraTonTai);
-			data.add(khachHang);
+	@Override
+	public int update(KhachHang t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 }

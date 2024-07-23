@@ -1,75 +1,74 @@
 package database;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import model.DonHang;
+import model.DonHang;
+import model.TheLoai;
 
-public class DonHangDAO {
-	private ArrayList<DonHang> data = new ArrayList<DonHang>();
+public class DonHangDAO implements DAOInterface<DonHang> {
+	private ArrayList<DonHang> data = new ArrayList<>();
 
+	@Override
 	public ArrayList<DonHang> selectAll() {
-		return data;
+		return this.data;
 	}
 
-	public DonHang selectById(String id) {
-		DonHang dh = new DonHang();
-		dh.setMaDonHang(id);
-
-		for (DonHang item : data) {
-			if (item.equals(dh)) {
-				return item;
+	@Override
+	public DonHang selectById(DonHang t) {
+		for (DonHang DonHang : data) {
+			if (data.equals(t)) {
+				return DonHang;
 			}
 		}
 		return null;
 	}
 
-	public int insert(DonHang dh) {
-		DonHang isCheckDonHang = this.selectById(dh.getMaDonHang());
-		if (isCheckDonHang == null) {
-			data.add(dh);
+	@Override
+	public int insert(DonHang t) {
+		if (this.selectById(t) == null) {
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
-	public int insertAll(ArrayList<DonHang> list) {
-		int count = 0;
-		for (DonHang item : list) {
-			count += this.insert(item);
+	@Override
+	public int insertAll(ArrayList<DonHang> arr) {
+		int dem = 0;
+		for (DonHang DonHang : arr) {
+			dem += this.insert(DonHang);
 		}
-		return count;
+		return dem;
 	}
 
-	public int delete(DonHang dh) {
-		DonHang isCheckDonHang = this.selectById(dh.getMaDonHang());
-		if (isCheckDonHang != null) {
+	@Override
+	public int delete(DonHang t) {
+		if (this.selectById(t) != null) {
 			ChiTietDonHangDAO ctdh = new ChiTietDonHangDAO();
-			ctdh.deleteForDonHang(dh);
-			data.remove(dh);
+			ctdh.deleteAll(t);
+			this.data.remove(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
-	public int deleteAll(ArrayList<DonHang> list) {
-		int count = 0;
-		for (DonHang item : list) {
-			count += this.delete(item);
+	@Override
+	public int deleteAll(ArrayList<DonHang> arr) {
+		int dem = 0;
+		for (DonHang DonHang : arr) {
+			dem += this.delete(DonHang);
 		}
-		return count;
+		return dem;
 	}
 
-	public int update(DonHang dh) {
-		DonHang isCheckDonHang = this.selectById(dh.getMaDonHang());
-		if (isCheckDonHang != null) {
-			data.remove(isCheckDonHang);
-			data.add(dh);
+	@Override
+	public int update(DonHang t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 }

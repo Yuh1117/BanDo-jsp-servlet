@@ -3,70 +3,69 @@ package database;
 import java.util.ArrayList;
 
 import model.SanPham;
-import model.TacGia;
 import model.TheLoai;
 
-public class SanPhamDAO {
-	private ArrayList<SanPham> sanPhams = new ArrayList<>();
+public class SanPhamDAO implements DAOInterface<SanPham> {
+	private ArrayList<SanPham> data = new ArrayList<>();
 
+	@Override
 	public ArrayList<SanPham> selectAll() {
-		return sanPhams;
+		return this.data;
 	}
 
-	public SanPham selectById(String id) {
-		for (SanPham sanPham : sanPhams) {
-			if (sanPham.getMaSanPham().equals(id)) {
-				return sanPham;
+	@Override
+	public SanPham selectById(SanPham t) {
+		for (SanPham SanPham : data) {
+			if (data.equals(t)) {
+				return SanPham;
 			}
 		}
 		return null;
 	}
 
-	public int insertAll(ArrayList<SanPham> list) {
+	@Override
+	public int insert(SanPham t) {
+		if (this.selectById(t) == null) {
+			this.data.add(t);
+			return 1;
+		}
+		return 0;
+	}
+
+	@Override
+	public int insertAll(ArrayList<SanPham> arr) {
 		int dem = 0;
-		for (SanPham sanPham : list) {
-			dem += this.insert(sanPham);
+		for (SanPham SanPham : arr) {
+			dem += this.insert(SanPham);
 		}
 		return dem;
 	}
 
-	public int insert(SanPham sp) {
-		SanPham kiemTraTonTai = this.selectById(sp.getMaSanPham());
-		if (kiemTraTonTai != null) {
-			sanPhams.add(sp);
+	@Override
+	public int delete(SanPham t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
 			return 1;
 		}
 		return 0;
 	}
 
-	public int delete(SanPham sp) {
-		SanPham kiemTraTonTai = this.selectById(sp.getMaSanPham());
-		if (kiemTraTonTai != null) {
-			sanPhams.remove(kiemTraTonTai);
-			return 1;
-		}
-		return 0;
-	}
-	
-	public int deleteAll(ArrayList<SanPham> list) {
+	@Override
+	public int deleteAll(ArrayList<SanPham> arr) {
 		int dem = 0;
-		for (SanPham sp : list) {
-			SanPham check = this.selectById(sp.getMaSanPham());
-			if (check != null) {
-				dem += this.delete(sp);
-			}
+		for (SanPham SanPham : arr) {
+			dem += this.delete(SanPham);
 		}
 		return dem;
 	}
 
-	public int update(SanPham sp) {
-		SanPham kiemTraTonTai = this.selectById(sp.getMaSanPham());
-		if (kiemTraTonTai != null) {
-			sanPhams.remove(kiemTraTonTai);
-			sanPhams.add(sp);
+	@Override
+	public int update(SanPham t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
+			this.data.add(t);
 			return 1;
 		}
 		return 0;
 	}
-
 }

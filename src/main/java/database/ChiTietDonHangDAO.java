@@ -4,81 +4,79 @@ import java.util.ArrayList;
 
 import model.ChiTietDonHang;
 import model.DonHang;
+import model.TheLoai;
 
-public class ChiTietDonHangDAO {
-	private ArrayList<ChiTietDonHang> data = new ArrayList<ChiTietDonHang>();
+public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
+	private ArrayList<ChiTietDonHang> data = new ArrayList<>();
 
+	@Override
 	public ArrayList<ChiTietDonHang> selectAll() {
-		return data;
+		return this.data;
 	}
 
-	public ChiTietDonHang selectById(String id) {
+	@Override
+	public ChiTietDonHang selectById(ChiTietDonHang t) {
 		for (ChiTietDonHang ChiTietDonHang : data) {
-			if (ChiTietDonHang.getMaChiTietDonHang().equals(id)) {
+			if (data.equals(t)) {
 				return ChiTietDonHang;
 			}
 		}
 		return null;
 	}
 
-	public int insert(ChiTietDonHang ChiTietDonHang) {
-		ChiTietDonHang kiemTraTonTai = this.selectById(ChiTietDonHang.getMaChiTietDonHang());
-		if (kiemTraTonTai == null) {
-			data.add(ChiTietDonHang);
+	@Override
+	public int insert(ChiTietDonHang t) {
+		if (this.selectById(t) == null) {
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
-	public int insertAll(ArrayList<ChiTietDonHang> list) {
+	@Override
+	public int insertAll(ArrayList<ChiTietDonHang> arr) {
 		int dem = 0;
-		for (ChiTietDonHang ChiTietDonHang : list) {
+		for (ChiTietDonHang ChiTietDonHang : arr) {
 			dem += this.insert(ChiTietDonHang);
 		}
 		return dem;
 	}
 
-	public int delete(ChiTietDonHang ChiTietDonHang) {
-		ChiTietDonHang kiemTraTonTai = this.selectById(ChiTietDonHang.getMaChiTietDonHang());
-		if (kiemTraTonTai != null) {
-			data.remove(ChiTietDonHang);
+	@Override
+	public int delete(ChiTietDonHang t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
-	public int deleteAll(ArrayList<ChiTietDonHang> list) {
+	@Override
+	public int deleteAll(ArrayList<ChiTietDonHang> arr) {
 		int dem = 0;
-		for (ChiTietDonHang ChiTietDonHang : list) {
-			ChiTietDonHang kiemTraTonTai = this.selectById(ChiTietDonHang.getMaChiTietDonHang());
-			if (kiemTraTonTai != null) {
-				data.remove(ChiTietDonHang);
-				dem++;
+		for (ChiTietDonHang ChiTietDonHang : arr) {
+			dem += this.delete(ChiTietDonHang);
+		}
+		return dem;
+	}
+
+	public int deleteAll(DonHang dh) {
+		int dem = 0;
+		for (ChiTietDonHang chiTietChiTietDonHang : data) {
+			if (chiTietChiTietDonHang.getDonHang().equals(dh)) {
+				this.delete(chiTietChiTietDonHang);
 			}
 		}
 		return dem;
 	}
 
-	public int deleteForDonHang(DonHang dh) {
-		int dem = 0;
-		for (ChiTietDonHang chiTietDonHang : data) {
-			if (chiTietDonHang.getDonHang().equals(dh)) {
-				this.data.remove(chiTietDonHang);
-			}
-		}
-		return dem;
-	}
-
-	public int update(ChiTietDonHang ChiTietDonHang) {
-		ChiTietDonHang kiemTraTonTai = this.selectById(ChiTietDonHang.getMaChiTietDonHang());
-		if (kiemTraTonTai != null) {
-			data.remove(kiemTraTonTai);
-			data.add(ChiTietDonHang);
+	@Override
+	public int update(ChiTietDonHang t) {
+		if (this.selectById(t) != null) {
+			this.data.remove(t);
+			this.data.add(t);
 			return 1;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 }

@@ -6,17 +6,17 @@ public class TacGia {
 	private String maTacGia;
 	private String hoVaTen;
 	private Date ngaySinh;
-	private String tienSu;
+	private String tieuSu;
 	
 	public TacGia() {
 		
 	}
 
-	public TacGia(String maTacGia, String hoVaTen, Date ngaySinh, String tienSu) {
+	public TacGia(String maTacGia, String hoVaTen, Date ngaySinh, String tieuSu) {
 		this.maTacGia = maTacGia;
 		this.hoVaTen = hoVaTen;
 		this.ngaySinh = ngaySinh;
-		this.tienSu = tienSu;
+		this.tieuSu = tieuSu;
 	}
 
 	public String getMaTacGia() {
@@ -43,12 +43,19 @@ public class TacGia {
 		this.ngaySinh = ngaySinh;
 	}
 
-	public String getTienSu() {
-		return tienSu;
+	public String getTieuSu() {
+		return tieuSu;
 	}
 
-	public void setTienSu(String tienSu) {
-		this.tienSu = tienSu;
+	public void setTieuSu(String tieuSu) {
+		this.tieuSu = tieuSu;
 	}
+
+	@Override
+	public String toString() {
+		return "TacGia [maTacGia=" + maTacGia + ", hoVaTen=" + hoVaTen + ", ngaySinh=" + ngaySinh + ", tieuSu=" + tieuSu
+				+ "]";
+	}
+	
 	
 }

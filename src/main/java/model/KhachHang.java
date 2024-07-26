@@ -132,4 +132,12 @@ public class KhachHang {
 		this.dangKyNhanBangTin = dangKyNhanBangTin;
 	}
 
+	@Override
+	public String toString() {
+		return "KhachHang [maKhacHang=" + maKhacHang + ", tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau
+				+ ", hoVaTen=" + hoVaTen + ", gioiTinh=" + gioiTinh + ", diaChi=" + diaChi + ", diaChiNhanHang="
+				+ diaChiNhanHang + ", diaChiMuaHang=" + diaChiMuaHang + ", ngaySinh=" + ngaySinh + ", soDienThoai="
+				+ soDienThoai + ", email=" + email + ", dangKyNhanBangTin=" + dangKyNhanBangTin + "]";
+	}
+	
 }

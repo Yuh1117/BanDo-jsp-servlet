@@ -236,4 +236,26 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 		return ketQua;
 	}
+
+	public boolean kiemTraTenDangNhap(String tenDangNhap) {
+		boolean ketQua = false;
+		try {
+			Connection con = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM khachhang WHERE tendangnhap=?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, tenDangNhap);
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				ketQua = true;
+				return ketQua;
+			}
+
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ketQua;
+	}
 }

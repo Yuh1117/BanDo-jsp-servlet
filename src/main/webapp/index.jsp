@@ -1,3 +1,4 @@
+<%@page import="model.KhachHang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,7 +48,22 @@
 					<input class="form-control me-2" type="search" placeholder="Search"
 						aria-label="Search">
 					<button class="btn btn-outline-success me-2" type="submit">Search</button>
-					<a class="btn btn-primary " style="white-space: nowrap;" href="register.jsp">Đăng ký</a>
+					<%
+					KhachHang kh = (KhachHang) session.getAttribute("khachHang");
+					if (kh == null) {
+					%>
+					<a class="btn btn-primary me-2" style="white-space: nowrap;"
+						href="login.jsp">Đăng nhập</a> <a class="btn btn-primary"
+						style="white-space: nowrap;" href="register.jsp">Đăng ký</a>
+					<%
+					} else {
+					%>
+					<a class="btn"><%=kh.getTenDangNhap()%></a>
+					<a class="btn" style="white-space: nowrap;"
+						href="do-logout">Đăng xuất</a>
+					<%
+					}
+					%>
 				</form>
 			</div>
 		</div>

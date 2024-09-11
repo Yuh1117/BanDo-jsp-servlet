@@ -101,6 +101,51 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 		return ketQua;
 	}
+	
+	public KhachHang selectByIdAndPassWord(KhachHang t) {
+		KhachHang ketQua = null;
+		try {
+			// Bước 1: tạo kết nối đến CSDL
+			Connection con = JDBCUtil.getConnection();
+
+			// Bước 2: tạo ra đối tượng statement
+			String sql = "SELECT * FROM khachhang WHERE tendangnhap=? and matkhau=?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, t.getTenDangNhap());
+			st.setString(2, t.getMatKhau());
+
+			// Bước 3: thực thi câu lệnh SQL
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery();
+
+			// Bước 4:
+			while (rs.next()) {
+				String maKhacHang = rs.getString("makhachhang");
+				String tenDangNhap = rs.getString("tendangnhap");
+				String matKhau = rs.getString("matkhau");
+				String hoVaTen = rs.getString("hoten");
+				String gioiTinh = rs.getString("gioitinh");
+				String diaChi = rs.getString("diachi");
+				String diaChiNhanHang = rs.getString("diachinhanhang");
+				String diaChiMuaHang = rs.getString("diachimuahang");
+				Date ngaySinh = rs.getDate("ngaysinh");
+				String soDienThoai = rs.getString("sodienthoai");
+				String email = rs.getString("email");
+				boolean dangKyNhanBangTin = rs.getBoolean("dangkinhanbangtin");
+
+				ketQua = new KhachHang(maKhacHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChi, diaChiNhanHang,
+						diaChiMuaHang, ngaySinh, soDienThoai, email, dangKyNhanBangTin);
+			}
+
+			// Bước 5:
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ketQua;
+	}
 
 	@Override
 	public int insert(KhachHang t) {

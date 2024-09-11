@@ -37,7 +37,7 @@
 }
 </style>
 </head>
-<body>
+<body class="bg-body-tertiary">
 	<%
 	String baoLoi = request.getAttribute("baoLoi") + "";
 	baoLoi = baoLoi.equals("null") ? "" : baoLoi;

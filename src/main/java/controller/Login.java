@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import database.KhachHangDAO;
 import model.KhachHang;
+import util.Encryption;
 
 /**
  * Servlet implementation class Login
@@ -45,6 +46,8 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		String tenDangNhap = request.getParameter("tenDangNhap");
 		String matKhau = request.getParameter("matKhau");
+		//Encrypt
+		matKhau = Encryption.toSHA1(matKhau);
 
 		KhachHang kh = new KhachHang();
 		kh.setTenDangNhap(tenDangNhap);

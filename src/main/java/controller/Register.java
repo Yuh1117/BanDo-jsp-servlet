@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 import database.KhachHangDAO;
 import model.KhachHang;
+import util.Encryption;
 
 /**
  * Servlet implementation class Register
@@ -78,6 +80,8 @@ public class Register extends HttpServlet {
 		} else {
 			Random rd = new Random();
 			String maKhachHang = System.currentTimeMillis() + rd.nextInt(1000) + "";
+			//Encrypt
+			matKhau = Encryption.toSHA1(matKhau);
 			KhachHang kh = new KhachHang(maKhachHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChiKhachHang,
 					diaChiNhanHang, diaChiMuaHang, Date.valueOf(ngaySinh), dienThoai, email, dongYNhanMail != null);
 			khachHangDAO.insert(kh);

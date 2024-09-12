@@ -19,8 +19,8 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		<div class="container-fluid">
+	<nav class="navbar navbar-expand-lg bg-body-tertiary" >
+		<div class="container-fluid" style="margin: 0 10%">
 			<a class="navbar-brand" href="#">VPGH</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -58,9 +58,18 @@
 					<%
 					} else {
 					%>
-					<a class="btn"><%=kh.getTenDangNhap()%></a>
-					<a class="btn" style="white-space: nowrap;"
-						href="do-logout">Đăng xuất</a>
+					<!-- Example single danger button -->
+					<div class="btn-group">
+						<button type="button" class="btn btn-danger dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false"><%=kh.getTenDangNhap()%></button>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
+							<li><a class="dropdown-item" href="#">Thông báo</a></li>
+							<li><a class="dropdown-item" href="password.jsp">Đổi mật khẩu</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="do-logout">Đăng xuất</a></li>
+						</ul>
+					</div>
 					<%
 					}
 					%>

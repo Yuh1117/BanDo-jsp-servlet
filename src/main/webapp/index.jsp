@@ -19,7 +19,7 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary" >
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid" style="margin: 0 10%">
 			<a class="navbar-brand" href="#">VPGH</a>
 			<button class="navbar-toggler" type="button"
@@ -31,7 +31,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
+						aria-current="page" href="#">Trang chủ</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" role="button"
@@ -45,9 +45,10 @@
 						</ul></li>
 				</ul>
 				<form class="d-flex" role="search">
-					<input class="form-control me-2" type="search" placeholder="Search"
+					<input class="form-control me-2" type="search" placeholder="Tìm kiếm"
 						aria-label="Search">
-					<button class="btn btn-outline-success me-2" type="submit">Search</button>
+					<button class="btn btn-outline-success me-2"
+						style="white-space: nowrap;" type="submit">Tìm kiếm</button>
 					<%
 					KhachHang kh = (KhachHang) session.getAttribute("khachHang");
 					if (kh == null) {
@@ -65,7 +66,10 @@
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
 							<li><a class="dropdown-item" href="#">Thông báo</a></li>
-							<li><a class="dropdown-item" href="password.jsp">Đổi mật khẩu</a></li>
+							<li><a class="dropdown-item" href="information.jsp">Thay
+									đổi thông tin</a></li>
+							<li><a class="dropdown-item" href="password.jsp">Đổi mật
+									khẩu</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="do-logout">Đăng xuất</a></li>
 						</ul>
@@ -80,7 +84,7 @@
 	<!-- End Navbar -->
 
 	<!-- Page Content -->
-	<div class="container">
+	<div class="container my-3">
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="list-group">
@@ -130,7 +134,7 @@
 								alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="#">Áo thun Pro-S1</a>
+									<a href="#">Product 1</a>
 								</h4>
 								<h5>50.000</h5>
 								<p class="card-text">Sản phẩm thoáng mát, có độ bền tốt, giữ
@@ -149,9 +153,9 @@
 								alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="#">Áo thun Pro-S1</a>
+									<a href="#">Product 2</a>
 								</h4>
-								<h5>50.000</h5>
+								<h5>100.000</h5>
 								<p class="card-text">Sản phẩm thoáng mát, có độ bền tốt, giữ
 									màu sắc tốt.</p>
 							</div>
@@ -168,9 +172,9 @@
 								alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="#">Áo thun Pro-S1</a>
+									<a href="#">Product 3</a>
 								</h4>
-								<h5>50.000</h5>
+								<h5>150.000</h5>
 								<p class="card-text">Sản phẩm thoáng mát, có độ bền tốt, giữ
 									màu sắc tốt.</p>
 							</div>

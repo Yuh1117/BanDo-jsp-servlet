@@ -27,7 +27,7 @@ String url = request.getScheme() + "://" + request.getServerName() + ":" + reque
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 	<main class="form-signin w-100 m-auto">
 		<form class="text-center" action="do-login" method="post">
-			<h1 class="h2 mb-3 fw-normal">ĐĂNG NHẬP</h1>
+			<h1 class="h2 mb-3 fw-medium">ĐĂNG NHẬP</h1>
 			<div class="form-floating">
 				<input type="text" class="form-control" id="tenDangNhap"
 					placeholder="tenDangNhap" name="tenDangNhap"> <label

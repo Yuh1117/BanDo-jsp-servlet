@@ -281,6 +281,47 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 		return ketQua;
 	}
+	
+	public int updateInfor(KhachHang t) {
+		int ketQua = 0;
+		try {
+			// Bước 1: tạo kết nối đến CSDL
+			Connection con = JDBCUtil.getConnection();
+
+			// Bước 2: tạo ra đối tượng statement
+			String sql = "UPDATE khachhang " + " SET " + " hoten=?" + ", gioitinh=?"
+					+ ", diachi=?" + ", diachinhanhang=?" + ", diachimuahang=?" + ", ngaysinh=?" + ", sodienthoai=?"
+					+ ", email=?" + ", dangkinhanbangtin=?" + " WHERE makhachhang=?";
+
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, t.getHoVaTen());
+			st.setString(2, t.getGioiTinh());
+			st.setString(3, t.getDiaChi());
+			st.setString(4, t.getDiaChiNhanHang());
+			st.setString(5, t.getDiaChiMuaHang());
+			st.setDate(6, t.getNgaySinh());
+			st.setString(7, t.getSoDienThoai());
+			st.setString(8, t.getEmail());
+			st.setBoolean(9, t.isDangKyNhanBangTin());
+			st.setString(10, t.getMaKhacHang());
+			// Bước 3: thực thi câu lệnh SQL
+
+			System.out.println(sql);
+			ketQua = st.executeUpdate();
+
+			// Bước 4:
+			System.out.println("Bạn đã thực thi: " + sql);
+			System.out.println("Có " + ketQua + " dòng bị thay đổi!");
+
+			// Bước 5:
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ketQua;
+	}
 
 	public boolean changePassword(KhachHang t) {
 		int ketQua = 0;

@@ -35,7 +35,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> Dropdown </a>
+						data-bs-toggle="dropdown" aria-expanded="false"> Thể loại </a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Action</a></li>
 							<li><a class="dropdown-item" href="#">Another action</a></li>
@@ -45,8 +45,8 @@
 						</ul></li>
 				</ul>
 				<form class="d-flex" role="search">
-					<input class="form-control me-2" type="search" placeholder="Tìm kiếm"
-						aria-label="Search">
+					<input class="form-control me-2" type="search"
+						placeholder="Tìm kiếm" aria-label="Search">
 					<button class="btn btn-outline-success me-2"
 						style="white-space: nowrap;" type="submit">Tìm kiếm</button>
 					<%
@@ -54,8 +54,8 @@
 					if (kh == null) {
 					%>
 					<a class="btn btn-primary me-2" style="white-space: nowrap;"
-						href="login.jsp">Đăng nhập</a> <a class="btn btn-primary"
-						style="white-space: nowrap;" href="register.jsp">Đăng ký</a>
+						href="khachhang/login.jsp">Đăng nhập</a> <a class="btn btn-primary"
+						style="white-space: nowrap;" href="khachhang/register.jsp">Đăng ký</a>
 					<%
 					} else {
 					%>
@@ -66,12 +66,13 @@
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
 							<li><a class="dropdown-item" href="#">Thông báo</a></li>
-							<li><a class="dropdown-item" href="information.jsp">Thay
+							<li><a class="dropdown-item" href="khachhang/information.jsp">Thay
 									đổi thông tin</a></li>
-							<li><a class="dropdown-item" href="password.jsp">Đổi mật
+							<li><a class="dropdown-item" href="khachhang/password.jsp">Đổi mật
 									khẩu</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="do-logout">Đăng xuất</a></li>
+							<li><a class="dropdown-item"
+								href="khach-hang?hanhDong=do-logout">Đăng xuất</a></li>
 						</ul>
 					</div>
 					<%
@@ -89,13 +90,10 @@
 			<div class="col-lg-3">
 				<div class="list-group">
 					<a href="#" class="list-group-item list-group-item-action"
-						aria-current="true"> The current link item </a> <a href="#"
-						class="list-group-item list-group-item-action">A second link
-						item</a> <a href="#" class="list-group-item list-group-item-action">A
-						third link item</a> <a href="#"
-						class="list-group-item list-group-item-action">A fourth link
-						item</a> <a class="list-group-item list-group-item-action disabled"
-						aria-disabled="true">A disabled link item</a>
+						aria-current="true"> Sản phẩm mới </a> <a href="#"
+						class="list-group-item list-group-item-action">Xu hướng</a> <a
+						href="#" class="list-group-item list-group-item-action">Flash
+						Sale</a>
 				</div>
 			</div>
 

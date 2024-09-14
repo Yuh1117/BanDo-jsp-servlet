@@ -26,7 +26,8 @@ String url = request.getScheme() + "://" + request.getServerName() + ":" + reque
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 	<main class="form-signin w-100 m-auto">
-		<form class="text-center" action="do-login" method="post">
+		<form class="text-center" action="<%=url %>/khach-hang" method="post">
+			<input type="hidden" name="hanhDong" value="do-login" />
 			<h1 class="h2 mb-3 fw-medium">ĐĂNG NHẬP</h1>
 			<div class="form-floating">
 				<input type="text" class="form-control" id="tenDangNhap"
@@ -55,7 +56,7 @@ String url = request.getScheme() + "://" + request.getServerName() + ":" + reque
 			</div>
 			<button class="btn btn-primary w-100 py-2 mb-2" type="submit">Đăng
 				nhập</button>
-			<a href="register.jsp" class="mt-1">Đăng ký tài khoản mới. </a>
+			<a href="<%=url%>/khachhang/register.jsp" class="mt-1">Đăng ký tài khoản mới. </a>
 			<p class="mt-5 mb-3 text-muted">&copy; VPGH</p>
 		</form>
 	</main>

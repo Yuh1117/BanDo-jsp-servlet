@@ -25,6 +25,9 @@
 </head>
 <body class="bg-body-tertiary">
 	<%
+	String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath();
+	
 	KhachHang kh = (KhachHang) session.getAttribute("khachHang");
 	if (kh == null) {
 	%>
@@ -44,7 +47,8 @@
 		<div class="red" id="baoLoi">
 			<%=baoLoi%>
 		</div>
-		<form class="form" action="change-information" method="post">
+		<form class="form" action="<%=url%>/khach-hang" method="post">
+			<input type="hidden" name="hanhDong" value="change-information" />
 			<h3>Thông tin khách hàng</h3>
 			<div class="mb-3">
 				<label for="hoVaTen" class="form-label">Họ và tên</label> <input
@@ -99,7 +103,8 @@
 			<div class="mb-3">
 				<label for="dongYNhanMail" class="form-label">Đồng ý nhận
 					thông báo qua email</label> <input type="checkbox" class="form-check-input"
-					id="dongYNhanMail" name="dongYNhanMail" <%=(kh.isDangKyNhanBangTin()) ? "checked" : "" %>>
+					id="dongYNhanMail" name="dongYNhanMail"
+					<%=(kh.isDangKyNhanBangTin()) ? "checked" : ""%>>
 			</div>
 			<button class="btn btn-primary form-control" type="submit">Lưu
 				thông tin</button>

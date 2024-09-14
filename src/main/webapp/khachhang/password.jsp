@@ -18,6 +18,9 @@
 </head>
 <body class="bg-body-tertiary">
 	<%
+	String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath();
+
 	KhachHang kh = (KhachHang) session.getAttribute("khachHang");
 	if (kh == null) {
 	%>
@@ -31,7 +34,8 @@
 	%>
 	<div class="container my-3">
 		<h1 class="text-center">ĐỔI MẬT KHẨU</h1>
-		<form action="change-password" method="POST">
+		<form action="<%=url%>/khach-hang" method="POST">
+			<input type="hidden" name="hanhDong" value="change-password" />
 			<div class="mb-3">
 				<label for="matKhauHienTai" class="form-label">Mật khẩu hiện
 					tại</label> <input type="password" class="form-control" id="matKhauHienTai"

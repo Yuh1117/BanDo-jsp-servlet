@@ -39,6 +39,9 @@
 </head>
 <body class="bg-body-tertiary">
 	<%
+	String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath();
+
 	String baoLoi = request.getAttribute("baoLoi") + "";
 	baoLoi = baoLoi.equals("null") ? "" : baoLoi;
 
@@ -80,7 +83,8 @@
 		<div class="red" id="baoLoi">
 			<%=baoLoi%>
 		</div>
-		<form class="form" action="do-register" method="post">
+		<form class="form" action="<%=url%>/khach-hang" method="post">
+			<input type="hidden" name="hanhDong" value="do-register" />
 			<h3>Tài khoản</h3>
 			<div class="mb-3">
 				<label for="tenDangNhap" class="form-label">Tên đăng nhập<span

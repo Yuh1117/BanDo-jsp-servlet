@@ -27,7 +27,7 @@
 	<%
 	String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath();
-	
+
 	KhachHang kh = (KhachHang) session.getAttribute("khachHang");
 	if (kh == null) {
 	%>
@@ -113,6 +113,5 @@
 	<%
 	}
 	%>
-</body>
 </body>
 </html>

@@ -56,8 +56,8 @@ String url = request.getScheme() + "://" + request.getServerName() + ":" + reque
 			</div>
 			<button class="btn btn-primary w-100 py-2 mb-2" type="submit">Đăng
 				nhập</button>
-			<a href="<%=url%>/khachhang/register.jsp" class="mt-1">Đăng ký tài khoản mới. </a>
-			<p class="mt-5 mb-3 text-muted">&copy; VPGH</p>
+			<a href="<%=url%>/khachhang/register.jsp" class="mt-1 text-decoration-none" >Đăng ký tài khoản mới</a>
+			<p class="my-4 text-muted">&copy; VPGH</p>
 		</form>
 	</main>
 </body>

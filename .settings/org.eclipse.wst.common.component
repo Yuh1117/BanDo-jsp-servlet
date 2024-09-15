@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="BanSach">
-        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        
+    <wb-module deploy-name="BanDo-jsp-servlet">
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <property name="context-root" value="BanSach"/>
-        <property name="java-output-path" value="/BanSach/build/classes"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
+        <property name="context-root" value="BanDo-jsp-servlet"/>
+        <property name="java-output-path" value="/BanDo-jsp-servlet/bin"/>
+            
     </wb-module>
+    
 </project-modules>

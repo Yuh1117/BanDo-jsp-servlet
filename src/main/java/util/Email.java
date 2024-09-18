@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 public class Email {
 	// Email: tungletest1.email@gmail.com
 	// Password: nebeekfipcstxcox
-	static final String from = "email1";
+	static final String from = "abc@gmail.com";
 	static final String password = "...";
 
 	public static boolean sendEmail(String to, String tieuDe, String noiDung) {
@@ -70,9 +70,5 @@ public class Email {
 			e.printStackTrace();
 			return false;
 		}
-	}
-
-	public static void main(String[] args) {
-		Email.sendEmail("email2", System.currentTimeMillis() + "", "Nội dung!");
 	}
 }

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import database.KhachHangDAO;
 import model.KhachHang;
+import util.Email;
 import util.Encryption;
+import util.RandomNumber;
 
 /**
  * Servlet implementation class KhachHang
@@ -48,6 +51,8 @@ public class KhachHangController extends HttpServlet {
 			changePassword(request, response);
 		} else if (hanhDong.equals("change-information")) {
 			changeInfor(request, response);
+		}else if(hanhDong.equals("verify")) {
+			verify(request, response);
 		}
 	}
 
@@ -72,7 +77,7 @@ public class KhachHangController extends HttpServlet {
 		kh.setMatKhau(matKhau);
 
 		KhachHangDAO khd = new KhachHangDAO();
-		KhachHang check = khd.selectByIdAndPassWord(kh);
+		KhachHang check = khd.selectByUserNameAndPassWord(kh);
 
 		String url = "";
 		if (check != null) {
@@ -146,12 +151,47 @@ public class KhachHangController extends HttpServlet {
 			matKhau = Encryption.toSHA1(matKhau);
 			KhachHang kh = new KhachHang(maKhachHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChiKhachHang,
 					diaChiNhanHang, diaChiMuaHang, Date.valueOf(ngaySinh), dienThoai, email, dongYNhanMail != null);
-			khachHangDAO.insert(kh);
+			if (khachHangDAO.insert(kh) > 0) {
+
+				// Day so xac thuc
+				String rand = RandomNumber.getSoNgauNhien();
+
+				// Quy dinh thoi gian hieu luc
+				Date todaysDate = new Date(new java.util.Date().getTime());
+				Calendar c = Calendar.getInstance();
+				c.setTime(todaysDate);
+				c.add(Calendar.DATE, 1);
+				Date thoGianHieuLucXacThuc = new Date(c.getTimeInMillis());
+
+				// Trang thai xac thuc = false
+				boolean trangThaiXacThuc = false;
+
+				kh.setMaXacThuc(rand);
+				kh.setThoiGianHieuLucCuaMaXacThuc(thoGianHieuLucXacThuc);
+				kh.setTrangThaiXacThuc(trangThaiXacThuc);
+
+				if (khachHangDAO.updateVerification(kh) > 0) {
+					// Gui email cho khach hang
+					Email.sendEmail(kh.getEmail(), "Xác thực tài khoản", getNoiDung(kh));
+				}
+			}
 			url = "/khachhang/success.jsp";
 		}
 
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
 		rd.forward(request, response);
+	}
+
+	private static String getNoiDung(KhachHang kh) {
+		String link = "http://localhost:8080/BanDo-jsp-servlet/khach-hang?hanhDong=verify&maKhachHang="
+				+ kh.getMaKhachHang() + "&maXacThuc=" + kh.getMaXacThuc();
+		String noiDung = "<p>Xin ch&agrave;o bạn <strong>" + kh.getHoVaTen() + "</strong>,</p>\r\n"
+				+ "<p>Vui l&ograve;ng x&aacute;c thực t&agrave;i khoản của bạn bằng c&aacute;ch nhập m&atilde; <strong>"
+				+ kh.getMaXacThuc() + "</strong>, hoặc click trực tiếp v&agrave;o đường link sau đ&acirc;y:</p>\r\n"
+				+ "<p><a href=\"" + link + "\">" + link + "</a></p>\r\n"
+				+ "<p>Đ&acirc;y l&agrave; email tự động, vui l&ograve;ng kh&ocirc;ng phản hồi email n&agrave;y.</p>\r\n"
+				+ "<p>Tr&acirc;n trọng cảm ơn.</p>";
+		return noiDung;
 	}
 
 	private void changePassword(HttpServletRequest request, HttpServletResponse response)
@@ -239,5 +279,39 @@ public class KhachHangController extends HttpServlet {
 		request.setAttribute("baoLoi", baoLoi);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
 		rd.forward(request, response);
+	}
+
+	private void verify(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String maKhachHang = request.getParameter("maKhachHang");
+		String maXacThuc = request.getParameter("maXacThuc");
+
+		KhachHangDAO khachHangDAO = new KhachHangDAO();
+		KhachHang kh = new KhachHang();
+		kh.setMaKhachHang(maKhachHang);
+		KhachHang khachHang = khachHangDAO.selectById(kh);
+
+		String msg = "";
+		if (khachHang != null) {
+			// Kiem tra ma xac thuc co giong nhau hay khong? 
+			// Kiem tra xem ma xac thuc con hieu luc hay khong?
+			if (khachHang.getMaXacThuc().equals(maXacThuc)) {
+				// Thanh Cong
+				khachHang.setTrangThaiXacThuc(true);
+				khachHangDAO.updateVerification(khachHang);
+				msg = "Xác thực thành công!";
+			} else {
+				// That Bai
+				msg = "Xác thực không thành công!";
+			}
+		} else {
+			msg = "Tài khoản không tồn tại!";
+		}
+		String url = "/khachhang/notification.jsp";
+		request.setAttribute("baoLoi", msg);
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+		rd.forward(request, response);
+
 	}
 }

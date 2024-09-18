@@ -92,7 +92,7 @@ public class DonHangDAO implements DAOInterface<DonHang> {
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getMaDonHang());
-			st.setString(2, t.getKhachHang().getMaKhacHang());
+			st.setString(2, t.getKhachHang().getMaKhachHang());
 			st.setString(3, t.getDiaChiMuaHang());
 			st.setString(4, t.getDiaChiNhanHang());
 			st.setString(5, t.getTrangThai());
@@ -157,7 +157,7 @@ public class DonHangDAO implements DAOInterface<DonHang> {
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getMaDonHang());
-			st.setString(2, t.getKhachHang().getMaKhacHang());
+			st.setString(2, t.getKhachHang().getMaKhachHang());
 			st.setString(3, t.getDiaChiMuaHang());
 			st.setString(4, t.getDiaChiNhanHang());
 			st.setString(5, t.getTrangThai());

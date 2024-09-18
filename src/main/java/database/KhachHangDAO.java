@@ -29,7 +29,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 			// Bước 4:
 			while (rs.next()) {
-				String maKhacHang = rs.getString("makhachhang");
+				String maKhachHang = rs.getString("makhachhang");
 				String tenDangNhap = rs.getString("tendangnhap");
 				String matKhau = rs.getString("matkhau");
 				String hoVaTen = rs.getString("hoten");
@@ -42,7 +42,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 				String email = rs.getString("email");
 				boolean dangKyNhanBangTin = rs.getBoolean("dangkinhanbangtin");
 
-				KhachHang kh = new KhachHang(maKhacHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChi,
+				KhachHang kh = new KhachHang(maKhachHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChi,
 						diaChiNhanHang, diaChiMuaHang, ngaySinh, soDienThoai, email, dangKyNhanBangTin);
 				ketQua.add(kh);
 			}
@@ -67,7 +67,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 			// Bước 2: tạo ra đối tượng statement
 			String sql = "SELECT * FROM khachhang WHERE makhachhang=?";
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, t.getMaKhacHang());
+			st.setString(1, t.getMaKhachHang());
 
 			// Bước 3: thực thi câu lệnh SQL
 			System.out.println(sql);
@@ -75,7 +75,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 			// Bước 4:
 			while (rs.next()) {
-				String maKhacHang = rs.getString("makhachhang");
+				String maKhachHang = rs.getString("makhachhang");
 				String tenDangNhap = rs.getString("tendangnhap");
 				String matKhau = rs.getString("matkhau");
 				String hoVaTen = rs.getString("hoten");
@@ -87,9 +87,13 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 				String soDienThoai = rs.getString("sodienthoai");
 				String email = rs.getString("email");
 				boolean dangKyNhanBangTin = rs.getBoolean("dangkinhanbangtin");
+				String maXacThuc = rs.getString("maxacthuc");
+				Date thoigianhieulucMaXacThuc = rs.getDate("thoigianhieulucmaxacthuc");
+				boolean trangThaiXacThuc = rs.getBoolean("trangthaixacthuc");
 
-				ketQua = new KhachHang(maKhacHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChi, diaChiNhanHang,
-						diaChiMuaHang, ngaySinh, soDienThoai, email, dangKyNhanBangTin);
+				ketQua = new KhachHang(maKhachHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChi, diaChiNhanHang,
+						diaChiMuaHang, ngaySinh, soDienThoai, email, dangKyNhanBangTin, maXacThuc,
+						thoigianhieulucMaXacThuc, trangThaiXacThuc);
 			}
 
 			// Bước 5:
@@ -102,7 +106,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 		return ketQua;
 	}
 
-	public KhachHang selectByIdAndPassWord(KhachHang t) {
+	public KhachHang selectByUserNameAndPassWord(KhachHang t) {
 		KhachHang ketQua = null;
 		try {
 			// Bước 1: tạo kết nối đến CSDL
@@ -120,7 +124,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 			// Bước 4:
 			while (rs.next()) {
-				String maKhacHang = rs.getString("makhachhang");
+				String maKhachHang = rs.getString("makhachhang");
 				String tenDangNhap = rs.getString("tendangnhap");
 				String matKhau = rs.getString("matkhau");
 				String hoVaTen = rs.getString("hoten");
@@ -132,9 +136,13 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 				String soDienThoai = rs.getString("sodienthoai");
 				String email = rs.getString("email");
 				boolean dangKyNhanBangTin = rs.getBoolean("dangkinhanbangtin");
+				String maXacThuc = rs.getString("maxacthuc");
+				Date thoigianhieulucMaXacThuc = rs.getDate("thoigianhieulucmaxacthuc");
+				boolean trangThaiXacThuc = rs.getBoolean("trangthaixacthuc");
 
-				ketQua = new KhachHang(maKhacHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChi, diaChiNhanHang,
-						diaChiMuaHang, ngaySinh, soDienThoai, email, dangKyNhanBangTin);
+				ketQua = new KhachHang(maKhachHang, tenDangNhap, matKhau, hoVaTen, gioiTinh, diaChi, diaChiNhanHang,
+						diaChiMuaHang, ngaySinh, soDienThoai, email, dangKyNhanBangTin, maXacThuc,
+						thoigianhieulucMaXacThuc, trangThaiXacThuc);
 			}
 
 			// Bước 5:
@@ -159,7 +167,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 					+ " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, t.getMaKhacHang());
+			st.setString(1, t.getMaKhachHang());
 			st.setString(2, t.getTenDangNhap());
 			st.setString(3, t.getMatKhau());
 			st.setString(4, t.getHoVaTen());
@@ -209,7 +217,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 			String sql = "DELETE from khachhang " + " WHERE makhachhang=?";
 
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, t.getMaKhacHang());
+			st.setString(1, t.getMaKhachHang());
 
 			// Bước 3: thực thi câu lệnh SQL
 			System.out.println(sql);
@@ -262,7 +270,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 			st.setString(9, t.getSoDienThoai());
 			st.setString(10, t.getEmail());
 			st.setBoolean(11, t.isDangKyNhanBangTin());
-			st.setString(12, t.getMaKhacHang());
+			st.setString(12, t.getMaKhachHang());
 			// Bước 3: thực thi câu lệnh SQL
 
 			System.out.println(sql);
@@ -281,7 +289,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 		return ketQua;
 	}
-	
+
 	public int updateInfor(KhachHang t) {
 		int ketQua = 0;
 		try {
@@ -289,9 +297,9 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 			Connection con = JDBCUtil.getConnection();
 
 			// Bước 2: tạo ra đối tượng statement
-			String sql = "UPDATE khachhang " + " SET " + " hoten=?" + ", gioitinh=?"
-					+ ", diachi=?" + ", diachinhanhang=?" + ", diachimuahang=?" + ", ngaysinh=?" + ", sodienthoai=?"
-					+ ", email=?" + ", dangkinhanbangtin=?" + " WHERE makhachhang=?";
+			String sql = "UPDATE khachhang " + " SET " + " hoten=?" + ", gioitinh=?" + ", diachi=?"
+					+ ", diachinhanhang=?" + ", diachimuahang=?" + ", ngaysinh=?" + ", sodienthoai=?" + ", email=?"
+					+ ", dangkinhanbangtin=?" + " WHERE makhachhang=?";
 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getHoVaTen());
@@ -303,7 +311,41 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 			st.setString(7, t.getSoDienThoai());
 			st.setString(8, t.getEmail());
 			st.setBoolean(9, t.isDangKyNhanBangTin());
-			st.setString(10, t.getMaKhacHang());
+			st.setString(10, t.getMaKhachHang());
+			// Bước 3: thực thi câu lệnh SQL
+
+			System.out.println(sql);
+			ketQua = st.executeUpdate();
+
+			// Bước 4:
+			System.out.println("Bạn đã thực thi: " + sql);
+			System.out.println("Có " + ketQua + " dòng bị thay đổi!");
+
+			// Bước 5:
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ketQua;
+	}
+
+	public int updateVerification(KhachHang t) {
+		int ketQua = 0;
+		try {
+			// Bước 1: tạo kết nối đến CSDL
+			Connection con = JDBCUtil.getConnection();
+
+			// Bước 2: tạo ra đối tượng statement
+			String sql = "UPDATE khachhang " + " SET " + " maxacthuc=?" + ", thoigianhieulucmaxacthuc=?"
+					+ ", trangthaixacthuc=?" + " WHERE makhachhang=?";
+
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, t.getMaXacThuc());
+			st.setDate(2, t.getThoiGianHieuLucCuaMaXacThuc());
+			st.setBoolean(3, t.isTrangThaiXacThuc());
+			st.setString(4, t.getMaKhachHang());
 			// Bước 3: thực thi câu lệnh SQL
 
 			System.out.println(sql);
@@ -334,7 +376,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getMatKhau());
-			st.setString(2, t.getMaKhacHang());
+			st.setString(2, t.getMaKhachHang());
 			// Bước 3: thực thi câu lệnh SQL
 
 			System.out.println(sql);

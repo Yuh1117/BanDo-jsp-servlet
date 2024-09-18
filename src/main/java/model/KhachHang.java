@@ -3,7 +3,7 @@ package model;
 import java.sql.Date;
 
 public class KhachHang {
-	private String maKhacHang;
+	private String maKhachHang;
 	private String tenDangNhap;
 	private String matKhau;
 	private String hoVaTen;
@@ -15,14 +15,17 @@ public class KhachHang {
 	private String soDienThoai;
 	private String email;
 	private boolean dangKyNhanBangTin;
+	private String maXacThuc;
+	private Date thoiGianHieuLucCuaMaXacThuc;
+	private boolean trangThaiXacThuc;
 
 	public KhachHang() {
 	}
 
-	public KhachHang(String maKhacHang, String tenDangNhap, String matKhau, String hoVaTen, String gioiTinh,
+	public KhachHang(String maKhachHang, String tenDangNhap, String matKhau, String hoVaTen, String gioiTinh,
 			String diaChi, String diaChiNhanHang, String diaChiMuaHang, Date ngaySinh, String soDienThoai, String email,
 			boolean dangKyNhanBangTin) {
-		this.maKhacHang = maKhacHang;
+		this.maKhachHang = maKhachHang;
 		this.tenDangNhap = tenDangNhap;
 		this.matKhau = matKhau;
 		this.hoVaTen = hoVaTen;
@@ -36,12 +39,32 @@ public class KhachHang {
 		this.dangKyNhanBangTin = dangKyNhanBangTin;
 	}
 
-	public String getMaKhacHang() {
-		return maKhacHang;
+	public KhachHang(String maKhachHang, String tenDangNhap, String matKhau, String hoVaTen, String gioiTinh,
+			String diaChi, String diaChiNhanHang, String diaChiMuaHang, Date ngaySinh, String soDienThoai, String email,
+			boolean dangKyNhanBangTin, String maXacThuc, Date thoiGianHieuLucCuaMaXacThuc, boolean trangThaiXacThuc) {
+		this.maKhachHang = maKhachHang;
+		this.tenDangNhap = tenDangNhap;
+		this.matKhau = matKhau;
+		this.hoVaTen = hoVaTen;
+		this.gioiTinh = gioiTinh;
+		this.diaChi = diaChi;
+		this.diaChiNhanHang = diaChiNhanHang;
+		this.diaChiMuaHang = diaChiMuaHang;
+		this.ngaySinh = ngaySinh;
+		this.soDienThoai = soDienThoai;
+		this.email = email;
+		this.dangKyNhanBangTin = dangKyNhanBangTin;
+		this.maXacThuc = maXacThuc;
+		this.thoiGianHieuLucCuaMaXacThuc = thoiGianHieuLucCuaMaXacThuc;
+		this.trangThaiXacThuc = trangThaiXacThuc;
 	}
 
-	public void setMaKhacHang(String maKhacHang) {
-		this.maKhacHang = maKhacHang;
+	public String getMaKhachHang() {
+		return maKhachHang;
+	}
+
+	public void setMaKhachHang(String maKhachHang) {
+		this.maKhachHang = maKhachHang;
 	}
 
 	public String getTenDangNhap() {
@@ -132,12 +155,36 @@ public class KhachHang {
 		this.dangKyNhanBangTin = dangKyNhanBangTin;
 	}
 
+	public String getMaXacThuc() {
+		return maXacThuc;
+	}
+
+	public void setMaXacThuc(String maXacThuc) {
+		this.maXacThuc = maXacThuc;
+	}
+
+	public Date getThoiGianHieuLucCuaMaXacThuc() {
+		return thoiGianHieuLucCuaMaXacThuc;
+	}
+
+	public void setThoiGianHieuLucCuaMaXacThuc(Date thoiGianHieuLucCuaMaXacThuc) {
+		this.thoiGianHieuLucCuaMaXacThuc = thoiGianHieuLucCuaMaXacThuc;
+	}
+
+	public boolean isTrangThaiXacThuc() {
+		return trangThaiXacThuc;
+	}
+
+	public void setTrangThaiXacThuc(boolean trangThaiXacThuc) {
+		this.trangThaiXacThuc = trangThaiXacThuc;
+	}
+
 	@Override
 	public String toString() {
-		return "KhachHang [maKhacHang=" + maKhacHang + ", tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau
+		return "KhachHang [maKhachHang=" + maKhachHang + ", tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau
 				+ ", hoVaTen=" + hoVaTen + ", gioiTinh=" + gioiTinh + ", diaChi=" + diaChi + ", diaChiNhanHang="
 				+ diaChiNhanHang + ", diaChiMuaHang=" + diaChiMuaHang + ", ngaySinh=" + ngaySinh + ", soDienThoai="
 				+ soDienThoai + ", email=" + email + ", dangKyNhanBangTin=" + dangKyNhanBangTin + "]";
 	}
-	
+
 }

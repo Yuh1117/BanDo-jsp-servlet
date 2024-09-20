@@ -50,6 +50,8 @@
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
 						<li><a class="dropdown-item" href="#">Thông báo</a></li>
+						<li><a class="dropdown-item" href="khachhang/avatar.jsp">Thay
+								đổi avatar</a></li>
 						<li><a class="dropdown-item" href="khachhang/information.jsp">Thay
 								đổi thông tin</a></li>
 						<li><a class="dropdown-item" href="khachhang/password.jsp">Đổi

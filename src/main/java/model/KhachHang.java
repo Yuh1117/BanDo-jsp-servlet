@@ -18,6 +18,7 @@ public class KhachHang {
 	private String maXacThuc;
 	private Date thoiGianHieuLucCuaMaXacThuc;
 	private boolean trangThaiXacThuc;
+	private String duongDanAnh;
 
 	public KhachHang() {
 	}
@@ -57,6 +58,28 @@ public class KhachHang {
 		this.maXacThuc = maXacThuc;
 		this.thoiGianHieuLucCuaMaXacThuc = thoiGianHieuLucCuaMaXacThuc;
 		this.trangThaiXacThuc = trangThaiXacThuc;
+	}
+	
+	public KhachHang(String maKhachHang, String tenDangNhap, String matKhau, String hoVaTen, String gioiTinh,
+			String diaChi, String diaChiNhanHang, String diaChiMuaHang, Date ngaySinh, String soDienThoai, String email,
+			boolean dangKyNhanBangTin, String maXacThuc, Date thoiGianHieuLucCuaMaXacThuc, boolean trangThaiXacThuc,
+			String duongDanAnh) {
+		this.maKhachHang = maKhachHang;
+		this.tenDangNhap = tenDangNhap;
+		this.matKhau = matKhau;
+		this.hoVaTen = hoVaTen;
+		this.gioiTinh = gioiTinh;
+		this.diaChi = diaChi;
+		this.diaChiNhanHang = diaChiNhanHang;
+		this.diaChiMuaHang = diaChiMuaHang;
+		this.ngaySinh = ngaySinh;
+		this.soDienThoai = soDienThoai;
+		this.email = email;
+		this.dangKyNhanBangTin = dangKyNhanBangTin;
+		this.maXacThuc = maXacThuc;
+		this.thoiGianHieuLucCuaMaXacThuc = thoiGianHieuLucCuaMaXacThuc;
+		this.trangThaiXacThuc = trangThaiXacThuc;
+		this.duongDanAnh = duongDanAnh;
 	}
 
 	public String getMaKhachHang() {
@@ -177,6 +200,16 @@ public class KhachHang {
 
 	public void setTrangThaiXacThuc(boolean trangThaiXacThuc) {
 		this.trangThaiXacThuc = trangThaiXacThuc;
+	}
+	
+	
+
+	public String getDuongDanAnh() {
+		return duongDanAnh;
+	}
+
+	public void setDuongDanAnh(String duongDanAnh) {
+		this.duongDanAnh = duongDanAnh;
 	}
 
 	@Override

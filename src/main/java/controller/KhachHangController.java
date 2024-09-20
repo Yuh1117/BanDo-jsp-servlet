@@ -1,8 +1,10 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import database.KhachHangDAO;
 import model.KhachHang;
@@ -51,7 +58,7 @@ public class KhachHangController extends HttpServlet {
 			changePassword(request, response);
 		} else if (hanhDong.equals("change-information")) {
 			changeInfor(request, response);
-		}else if(hanhDong.equals("verify")) {
+		} else if (hanhDong.equals("verify")) {
 			verify(request, response);
 		}
 	}
@@ -281,8 +288,7 @@ public class KhachHangController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private void verify(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String maKhachHang = request.getParameter("maKhachHang");
 		String maXacThuc = request.getParameter("maXacThuc");
@@ -294,7 +300,7 @@ public class KhachHangController extends HttpServlet {
 
 		String msg = "";
 		if (khachHang != null) {
-			// Kiem tra ma xac thuc co giong nhau hay khong? 
+			// Kiem tra ma xac thuc co giong nhau hay khong?
 			// Kiem tra xem ma xac thuc con hieu luc hay khong?
 			if (khachHang.getMaXacThuc().equals(maXacThuc)) {
 				// Thanh Cong
@@ -312,6 +318,5 @@ public class KhachHangController extends HttpServlet {
 		request.setAttribute("baoLoi", msg);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
 		rd.forward(request, response);
-
 	}
 }
